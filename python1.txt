@@ -1,0 +1,21 @@
+import turtle
+import random
+
+# Screen setup
+screen = turtle.Screen()
+screen.bgcolor("black")
+
+# Turtle setup
+t = turtle.Turtle()
+t.speed(0)
+t.width(2)
+
+colors = ["red", "yellow", "blue", "green", "purple", "orange", "cyan", "pink"]
+
+# Pattern
+for i in range(200):
+    t.pencolor(random.choice(colors))
+    t.forward(i * 2)
+    t.left(59)   # 59 degree se beautiful spiral pattern banega
+
+turtle.done()
