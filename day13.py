@@ -72,9 +72,24 @@ f = open('myfile.txt', 'a')
 # print(f.readline())
 # print(f.tell())
 
-with open('sample.txt', 'w') as f:
-    f.write('Hello World!')
-    f.truncate(15)
+# with open('sample.txt', 'w') as f:
+#     f.write('Hello World!')
+#     f.truncate(15)
+
+# l1=[4,5,6,7,8,8,8,5,4,34]
+
+# for i in range(len(l1)-1):
+#     for j in range(len(l1)-2):
+#         if(l1[i]==l1[j+1]):
+#             del l1[j+1]
+
+# print(l1)
+
+
+# l1=[4,5,6,7,8,8,8,5,4,34]
+
+# l2=dict.fromkeys(l1)
+# print(list(l2))
 
 
 
