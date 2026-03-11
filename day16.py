@@ -1,8 +1,4 @@
-# Oops Concepts
-
 class Human:
-    # def __init__(self):
-    #     pass
     name="Shubham"
     age=56
 
@@ -12,12 +8,15 @@ class Human:
 
 h1=Human()
 h1.name="Rohan"
-h1.age=45
-
+h1.age=56
 h1.greet()
 
 h2=Human()
-
-h2.name="Mohan"
-h2.age=67
+h2.name="John"
+h2.age=89
 h2.greet()
+
+h3=Human()
+
+h3.greet()
+
