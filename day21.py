@@ -6,7 +6,6 @@ class Animal:
     def run(self):
         print("Animal is Running....")
 
-
 a1=Animal("Rohan",45,101)
 
 
