@@ -37,4 +37,4 @@ a1=Animal("Horse")
 # Animal.run(b1)
 # b1.run()
 
-a1.run()
+# a1.run()
