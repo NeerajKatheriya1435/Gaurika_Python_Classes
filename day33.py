@@ -52,3 +52,34 @@ import asyncio
 
 # l1=[i for i in range(5)]
 # print(l1)
+
+# import sndhdr
+# from preferredsoundplayer import *
+# sound1=soundplay("newsong.mp3")
+# getIsPlaying(sound1)
+
+import pygame
+pygame.mixer.init()
+# Load and play background music (streaming)
+
+
+clock=pygame.time.Clock()
+fps=90
+screen = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("My name is Gaurika")
+
+# game=pygame.mixer.music.load('newsong.mp3')
+# pygame.mixer.Sound.play(game) # -1 loops indefinitely
+
+# Load a short sound effect
+# jump_sound.set_volume(0.5)
+
+sound_effect = pygame.mixer.Sound('newsong.mp3')
+sound_effect.play()
+# pygame.display()
+pygame.display.update()
+clock.tick(fps)
+
+pygame.time.delay(19000)
+
+
