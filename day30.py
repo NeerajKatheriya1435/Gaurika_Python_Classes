@@ -45,3 +45,10 @@ import requests
 
 # print(response.status_code)
 # print(response.json())  # Converts JSON response to Python dict
+
+{
+    "email":"Neeraj@gmail.com",
+    "password":"Neeraj@1234"
+}
+
+# --> DFGHJ&*T^UFGUHIHI*YTUGBY$R%^RFYGgjuhuyt76tyug

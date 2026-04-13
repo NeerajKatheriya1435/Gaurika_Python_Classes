@@ -1,2 +1,2 @@
 
-class Car(Bike):
+if __name__ == "__main__":

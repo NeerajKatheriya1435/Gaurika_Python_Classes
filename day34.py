@@ -43,17 +43,19 @@
 
 # print("Program finished")
 
-
+import time
 from multiprocessing import Process
 
 def calculate_square(numbers):
     print("Squares:")
     for n in numbers:
+        time.sleep(1)
         print(f"{n}^2 = {n*n}")
 
 def calculate_cube(numbers):
     print("Cubes:")
     for n in numbers:
+        time.sleep(1)
         print(f"{n}^3 = {n*n*n}")
 
 if __name__ == "__main__":
@@ -64,11 +66,11 @@ if __name__ == "__main__":
     p2 = Process(target=calculate_cube, args=(nums,))
 
     # Start processes
-    p2.start()
     p1.start()
+    p2.start()
 
     # Wait for processes to finish
     p1.join()
     p2.join()
 
-    print("Done with multiprocessing!")
+print("Done with multiprocessing!")
