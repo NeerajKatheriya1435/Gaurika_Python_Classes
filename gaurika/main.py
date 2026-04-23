@@ -1,6 +1,6 @@
 import pygame
 import random
-import sys
+# import sys
 
 # pygame setup
 pygame.init()
@@ -31,29 +31,31 @@ class Game:
         self.gameOn=True
         self.birdX=100
         self.birdY=200
-
-        self.pipVel=0
+        # width=0
+        self.pipeVel=0
         self.gravity=0
         self.flap=0
+        self.score=0
         self.rotateAngle=0
-
+        self.gameOver=False
         self.pipeX=[width,width+200,width+400,width+600,width+800,width+1000,width+1200]
         self.lowerPipeY=[self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe()]
         self.upperPipeY=[self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe()]
 
-    def isCollide(self):
-        
-    def flapBird(self):
+    def flapping(self):
         self.birdY+=self.gravity
-        self.flap-=1
-        self.birdY-=self.flap
+        if(self.gameOver==False):
+            self.flap-=1
+            self.birdY-=self.flap
 
     def movingPipe(self):
+
         for i in range(7):
-            self.pipeX[i]-=self.pipVel
+            self.pipeX[i]-=self.pipeVel
+        
         for i in range(7):
-            if (self.pipeX[i] < -100):
-                self.pipeX[i]=width+50
+            if(self.pipeX[i]<-100):
+                self.pipeX[i]=width
                 self.lowerPipeY[i]=self.randomLowerPipe()
                 self.upperPipeY[i]=self.randomUpperPipe()
 
@@ -68,11 +70,11 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
-                
+                    # sys.exit()
+
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_SPACE:
-                        self.pipVel=5
+                        self.pipeVel=5
                         self.gravity=10
                         self.flap=20
                         self.rotateAngle=15
@@ -85,16 +87,18 @@ class Game:
 
             #bird display
             screen.blit(pygame.transform.rotozoom(bird,self.rotateAngle,1),(self.birdX,self.birdY))
- 
+
             for i in range(7):
                 screen.blit(lowerPipe,(self.pipeX[i],self.lowerPipeY[i]))
 
             for i in range(7):
                 screen.blit(upperPipe,(self.pipeX[i],self.upperPipeY[i]))
 
-            self.movingPipe()
-            self.flapBird()
             #Updating the display according to content
+
+            
+            self.movingPipe()
+            self.flapping()
             pygame.display.update()
             clock.tick(60)
 
