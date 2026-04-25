@@ -36,17 +36,48 @@ class Game:
         self.gravity=0
         self.flap=0
         self.rotateAngle=0
+        self.isGameOver=False
+        self.playSound=False
+
 
         self.pipeX=[width,width+200,width+400,width+600,width+800,width+1000,width+1200]
         self.lowerPipeY=[self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe(),self.randomLowerPipe()]
         self.upperPipeY=[self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe(),self.randomUpperPipe()]
-
+         
+    
     def isCollide(self):
+        for i in range(7):
+            if((self.birdX-20>=self.pipeX[i] and self.birdX<=self.pipeX[i]+lowerPipe.get_width()) and
+                (self.birdY+bird.get_height()-40>self.lowerPipeY[i] or self.birdY+40<=self.upperPipeY[i]+upperPipe.get_height())
+               ):
+                return True
+            
+        if(self.birdY<=0 or self.birdY+bird.get_height()>=height):
+            return True
+        
+    def screenText(self,text,color,x,y,size,bold,style):
+        font=pygame.font.SysFont(style,size,bold=bold)
+        screentxt=font.render(text,True,color)
+        screen.blit(screentxt,(x,y))
+    
+    def gameOver(self):
+        if(self.isCollide()):
+            self.isGameOver=True
+            self.gravity=0
+            self.flap=0
+            self.pipVel=0
+            self.rotateAngle=0
+            self.screenText("Game Over !!!",(255,25,255),450,300,85,True,"Fixedsys")
+            self.screenText("Please enter to play again !!!",(25,255,255),350,380,75,True,"Fixedsys")
+            if(self.playSound==False):
+                pygame.mixer.Sound.play(hitSound)
+                self.playSound=True
         
     def flapBird(self):
-        self.birdY+=self.gravity
-        self.flap-=1
-        self.birdY-=self.flap
+        if(self.isGameOver==False):
+            self.birdY+=self.gravity
+            self.flap-=1
+            self.birdY-=self.flap
 
     def movingPipe(self):
         for i in range(7):
@@ -72,10 +103,16 @@ class Game:
                 
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_SPACE:
-                        self.pipVel=5
-                        self.gravity=10
-                        self.flap=20
-                        self.rotateAngle=15
+                        if(self.isGameOver==False):
+                            self.pipVel=5
+                            self.gravity=10
+                            self.flap=20
+                            self.rotateAngle=15
+                    if(self.isGameOver==True):
+                        if event.key==pygame.K_RETURN:
+                            newObj=Game()
+                            newObj.gameFlappy()
+
                 if event.type==pygame.KEYUP:
                     if event.key==pygame.K_SPACE:
                         self.rotateAngle=0
@@ -94,6 +131,8 @@ class Game:
 
             self.movingPipe()
             self.flapBird()
+
+            self.gameOver()
             #Updating the display according to content
             pygame.display.update()
             clock.tick(60)
